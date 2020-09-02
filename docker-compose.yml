@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+    backend:
+        image: node:latest
+        container_name: tengja_backend_d
+        # restart: always
+        ports:
+            - "4000:4000"
+        working_dir: /usr/home/app
+        volumes:
+            - ./tengja_backend_d:/usr/home/app
+        command: "yarn run start-dev"
+    frontend:
+        image: node:latest
+        container_name: tengja_frontend_d
+        stdin_open: true
+        ports:
+            - "80:3000"
+        working_dir: /usr/home/app
+        volumes:
+            - ./tengja_frontend_d:/usr/home/app
+        command: "yarn start"
