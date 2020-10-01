@@ -11,6 +11,23 @@ services:
         volumes:
             - ./tengja_backend_d:/usr/home/app
         command: "yarn run start-dev"
+        networks:
+            - frontend
+            - backend
+    redis:
+        image: redis
+        ports: 
+            - "6379:6379"
+        container_name: tengja_redis_d
+        command: ["redis-server", "--appendonly", "yes"]
+        privileged: true
+        hostname: redis
+        networks:
+            - backend
+        volumes:
+            - ./mounts/tengja_redis_d/config/redis.conf:/usr/local/etc/redis/redis.conf
+            - ./mounts/tengja_redis_d/scripts:/scripts
+        command: bash -c "/scripts/init.sh"
     frontend:
         image: node:latest
         container_name: tengja_frontend_d
@@ -21,3 +38,9 @@ services:
         volumes:
             - ./tengja_frontend_d:/usr/home/app
         command: "yarn start"
+        networks:
+            - frontend
+
+networks: 
+    frontend:
+    backend:
