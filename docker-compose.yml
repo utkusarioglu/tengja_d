@@ -6,7 +6,7 @@ services:
         container_name: tengja_backend_d
         # restart: always
         ports:
-            - "4000:4000"
+            - 4000:4000
         working_dir: /usr/home/app
         volumes:
             - ./tengja_backend_d:/usr/home/app
@@ -17,7 +17,7 @@ services:
     redis:
         image: redis
         ports: 
-            - "6379:6379"
+            - 6379:6379
         container_name: tengja_redis_d
         command: ["redis-server", "--appendonly", "yes"]
         privileged: true
@@ -28,6 +28,19 @@ services:
             - ./mounts/tengja_redis_d/config/redis.conf:/usr/local/etc/redis/redis.conf
             - ./mounts/tengja_redis_d/scripts:/scripts
         command: bash -c "/scripts/init.sh"
+    postgres:
+        image: postgres
+        container_name: tengja_postgres_d
+        hostname: postgres
+        ports: 
+            - 5432:5432
+        networks: 
+            - backend
+        restart: always
+        environment:
+            POSTGRES_USER: exampleuser
+            POSTGRES_PASSWORD: examplepass
+            POSTGRES_DB: exampledb
     frontend:
         image: node:latest
         container_name: tengja_frontend_d
