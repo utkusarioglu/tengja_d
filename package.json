@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "workspaces": [
+    "tengja_backend_d",
+    "tengja_frontend_d",
+    "tengja_shared_d"
+  ]
+}

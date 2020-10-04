@@ -4,3 +4,6 @@
 [submodule "tengja_backend_d"]
 	path = tengja_backend_d
 	url = https://github.com/utkusarioglu/tengja_backend_d.git
+[submodule "tengja_shared_d"]
+	path = tengja_shared_d
+	url = https://github.com/utkusarioglu/tengja_shared_d.git
